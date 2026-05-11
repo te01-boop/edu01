@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리 땅 독도와 친해지는 첫 번째 걸음</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        dokdo: {
+                            light: '#e0f2fe',
+                            DEFAULT: '#0284c7',
+                            dark: '#0c4a6e',
+                            accent: '#f59e0b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8fafc;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.83,121.22,200.75,108.57,243.68,100.8,283.47,78.5,321.39,56.44Z" fill="%23f8fafc"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .distance-bar {
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .tab-btn.active {
+            background-color: #0284c7;
+            color: white;
+            border-color: #0284c7;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header / Hero Section -->
+    <header class="hero-bg min-h-screen flex flex-col justify-center items-center text-center text-white px-4">
+        <div class="max-w-4xl z-10 floating">
+            <h2 class="text-dokdo-accent font-bold tracking-widest mb-4 text-sm md:text-lg">입문자를 위한 가이드</h2>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">우리 땅 독도와 친해지는<br>첫 번째 걸음</h1>
+            <p class="text-lg md:text-xl text-dokdo-light font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                독도는 단순히 동해 끝자락에 홀로 서 있는 외로운 섬이 아닙니다.<br>
+                우리 민족의 유구한 역사와 숨결이 고스란히 담긴 소중한 영토입니다.
+            </p>
+            <a href="#section1" class="inline-block bg-white text-dokdo-dark font-bold py-3 px-8 rounded-full shadow-lg hover:bg-dokdo-light transition duration-300">
+                독도 탐험 시작하기 <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+        <div class="wave"></div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-16 space-y-32">
+
+        <!-- Section 1: Welcome -->
+        <section id="section1" class="reveal pt-10">
+            <div class="text-center mb-12">
+                <span class="text-dokdo font-bold tracking-wider">01. 환영합니다</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">독도 여행을 위한 준비</h2>
+            </div>
+            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 text-9xl text-gray-50 opacity-50 transform translate-x-4 -translate-y-4">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <p class="text-lg leading-relaxed text-gray-700 relative z-10">
+                    멀게만 느껴졌던 독도가 사실은 우리와 얼마나 긴밀하게 연결되어 있는지, 그리고 지리적으로나 과학적으로 어떤 놀라운 이야기들을 품고 있는지 전문가와 함께 하나씩 알아가 볼까요? 여러분의 마음속에 독도가 더는 낯선 섬이 아닌, 우리와 연결된 따뜻하고 소중한 곳으로 자리 잡기를 바랍니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Location -->
+        <section id="location" class="reveal">
+            <div class="text-center mb-12">
+                <span class="text-dokdo font-bold tracking-wider">02. 위치와 거리</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">독도는 어디에 있을까요?</h2>
+                <p class="text-gray-600">독도가 어느 나라의 생활권에 더 가까운지 명확히 알 수 있습니다.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-xl">
+                <!-- Visualizer -->
+                <div class="space-y-8 mb-10" id="distance-bars">
+                    <div>
+                        <div class="flex justify-between text-sm font-bold mb-1">
+                            <span>울릉도</span>
+                            <span class="text-dokdo">87.4km (가장 가까운 거리)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 relative overflow-hidden">
+                            <div class="bg-dokdo h-6 rounded-full distance-bar flex items-center justify-end px-2 text-white text-xs font-bold" data-width="35%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-bold mb-1">
+                            <span>일본 오키섬</span>
+                            <span class="text-red-500">157.5km (약 2배 더 멈)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 relative overflow-hidden">
+                            <div class="bg-red-400 h-6 rounded-full distance-bar flex items-center justify-end px-2 text-white text-xs font-bold" data-width="65%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-dokdo-light p-6 rounded-xl border-l-4 border-dokdo text-dokdo-dark">
+                    <p class="mb-2"><strong><i class="fas fa-eye mr-2"></i>가시성의 원칙:</strong> 울릉도에서는 맑은 날 독도를 육안으로 직접 볼 수 있지만, 일본의 오키섬에서는 아무리 날씨가 좋아도 수평선 너머의 독도가 보이지 않습니다.</p>
+                    <p>아주 먼 옛날부터 우리 조상들이 독도를 자연스럽게 인지하고 우리 땅으로 다스려온 이유는 바로 이 '가시성'과 '근접성' 덕분입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Size -->
+        <section class="reveal">
+            <div class="text-center mb-12">
+                <span class="text-dokdo font-bold tracking-wider">03. 면적과 구성</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">생각보다 든든한 독도의 크기</h2>
+                <p class="text-gray-600">총 면적 187,554㎡ (서울 잠실종합운동장의 약 2배)</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Seodo -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-4 border-dokdo-accent transition-transform hover:-translate-y-2">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-orange-100 text-dokdo-accent rounded-full flex items-center justify-center text-2xl mb-6">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">서도 <span class="text-sm font-normal text-gray-500">(88,740㎡)</span></h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            동도보다 조금 더 넓으며, 주민 숙소가 위치하여 우리 국민의 따뜻한 삶이 깃든 평화로운 터전입니다.
+                        </p>
+                    </div>
+                </div>
+                <!-- Dongdo -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-4 border-dokdo transition-transform hover:-translate-y-2">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-blue-100 text-dokdo rounded-full flex items-center justify-center text-2xl mb-6">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">동도 <span class="text-sm font-normal text-gray-500">(73,297㎡)</span></h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            서도보다 약간 작지만, 독도 경비대와 등대 등 주요 시설이 모여 있어 우리 영토를 수호하는 든든한 국방의 심장 역할을 합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 mt-6 text-sm">*그 외 주변의 89개 바위섬으로 이루어져 있습니다.</p>
+        </section>
+
+        <!-- Section 4: Address -->
+        <section class="reveal">
+            <div class="text-center mb-12">
+                <span class="text-dokdo font-bold tracking-wider">04. 주소와 좌표</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">독도에도 우리 집처럼 주소가 있어요!</h2>
+            </div>
+
+            <div class="bg-gradient-to-br from-dokdo to-dokdo-dark rounded-3xl shadow-2xl p-8 md:p-12 text-white relative overflow-hidden">
+                <i class="fas fa-map-marked-alt absolute -right-10 -bottom-10 text-9xl opacity-20"></i>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 border-b border-white/30 pb-2"><i class="fas fa-map-marker-alt mr-2"></i>행정구역</h3>
+                        <p class="text-2xl font-light mb-6">경상북도 울릉군 울릉읍 <strong class="font-bold">독도리</strong></p>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-white/10 p-4 rounded-lg">
+                                <p class="text-sm text-dokdo-light mb-1">동도 (주요시설: 독도 경비대, 등대)</p>
+                                <p class="font-bold">이사부길</p>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-lg">
+                                <p class="text-sm text-dokdo-light mb-1">서도 (주요시설: 주민 숙소, 물골)</p>
+                                <p class="font-bold">안용복길</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col justify-center">
+                        <div class="bg-white text-dokdo-dark p-6 rounded-2xl shadow-inner">
+                            <h3 class="text-lg font-bold mb-4 flex items-center"><i class="fas fa-satellite mr-2 text-dokdo"></i>위성 좌표 <span class="text-xs ml-2 text-gray-500">(동도 우산봉 기준)</span></h3>
+                            <div class="space-y-2 font-mono text-lg font-bold">
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-500 text-sm">위도</span>
+                                    <span>N 37° 14′ 26.8″</span>
+                                </div>
+                                <div class="flex justify-between pt-2">
+                                    <span class="text-gray-500 text-sm">경도</span>
+                                    <span>E 131° 52′ 10.4″</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-center mt-6 text-dokdo-light text-sm">주소가 있다는 것은 그 주변의 바다와 하늘도<br>모두 우리의 영역이라는 뜻입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Boundaries (Interactive Tabs) -->
+        <section class="reveal">
+            <div class="text-center mb-12">
+                <span class="text-dokdo font-bold tracking-wider">05. 우리 영토의 경계</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">영토, 영해, 영공, 그리고 EEZ</h2>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10">
+                <!-- Tab Buttons -->
+                <div class="flex flex-wrap gap-2 mb-8 justify-center border-b pb-4">
+                    <button class="tab-btn active px-6 py-2 rounded-full border border-gray-300 font-bold transition-colors" onclick="openTab('tab-land')">영토 (땅)</button>
+                    <button class="tab-btn px-6 py-2 rounded-full border border-gray-300 font-bold transition-colors" onclick="openTab('tab-sea')">영해 (바다)</button>
+                    <button class="tab-btn px-6 py-2 rounded-full border border-gray-300 font-bold transition-colors" onclick="openTab('tab-sky')">영공 (하늘)</button>
+                    <button class="tab-btn px-6 py-2 rounded-full border border-gray-300 font-bold transition-colors" onclick="openTab('tab-eez')">EEZ</button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="tab-land" class="tab-content active text-center py-8">
+                    <i class="fas fa-mountain text-6xl text-amber-700 mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">영토 (Territory)</h3>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto">국가의 주권이 미치는 지표상의 범위(땅)입니다. 독도의 동도, 서도, 그리고 89개의 바위섬 전체가 대한민국의 확고한 영토입니다.</p>
+                </div>
+
+                <div id="tab-sea" class="tab-content text-center py-8">
+                    <i class="fas fa-water text-6xl text-blue-500 mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">영해 (Territorial Sea)</h3>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto">해안선(기선)으로부터 <strong class="text-dokdo">12해리 (약 22km)</strong>까지의 바다입니다. 이 구역 내의 바다는 대한민국의 완전한 주권이 미칩니다.</p>
+                </div>
+
+                <div id="tab-sky" class="tab-content text-center py-8">
+                    <i class="fas fa-cloud text-6xl text-sky-300 mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">영공 (Airspace)</h3>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto">영토와 영해의 수직 상공(하늘)으로, 보통 대기권 이내를 뜻합니다. 독도의 하늘 역시 우리의 주권이 미치는 곳입니다.</p>
+                </div>
+
+                <div id="tab-eez" class="tab-content text-center py-8">
+                    <i class="fas fa-fish text-6xl text-teal-500 mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">배타적 경제수역 (EEZ)</h3>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto">영해 밖으로 기선에서 <strong class="text-dokdo">200해리</strong>까지의 수역입니다. 이곳은 자원을 탐사하고 개발할 수 있는 권리가 보장되는 곳으로, 이른바 '황금어장'과 막대한 지하자원이 풍부합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Nature & Resources -->
+        <section class="reveal">
+            <div class="text-center mb-12">
+                <span class="text-dokdo font-bold tracking-wider">06. 자연환경과 자원</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">독도의 자연과 숨겨진 보물</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-red-500 hover:shadow-xl transition-shadow">
+                    <div class="text-red-500 text-4xl mb-4"><i class="fas fa-volcano"></i></div>
+                    <h3 class="text-xl font-bold mb-3">탄생의 신비 (지질)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        약 460~250만 년 전 화산 활동으로 생긴 화산섬입니다. 울릉도, 제주도보다 먼저 태어난 '형님 격' 섬이죠. 울릉도와 독도는 <strong>조면암</strong>으로 구성되어 지질적 유사성을 띠지만, 일본 오키섬은 편마암으로 이루어져 지질학적으로 무관함이 증명되었습니다.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-sky-400 hover:shadow-xl transition-shadow">
+                    <div class="text-sky-400 text-4xl mb-4"><i class="fas fa-cloud-sun-rain"></i></div>
+                    <h3 class="text-xl font-bold mb-3">기후 특성</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        연평균 기온은 약 12°C로 온화합니다. 하지만 바다 한가운데 있어 안개가 잦고, 일 년의 절반은 눈비가 내려 습합니다. 맑은 날이 일 년에 약 60일뿐이라 독도의 온전한 모습을 보는 것은 큰 행운입니다.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-amber-400 hover:shadow-xl transition-shadow">
+                    <div class="text-amber-400 text-4xl mb-4"><i class="fas fa-fire-alt"></i><i class="fas fa-icicles ml-2 text-cyan-300"></i></div>
+                    <h3 class="text-xl font-bold mb-3">불타는 얼음</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        독도 인근 해저에는 <strong>가스 하이드레이트</strong>가 약 6억 톤가량 매장되어 있습니다. 이는 우리 국민이 30년간 사용할 수 있는 막대한 양으로, 미래 에너지 자원의 보고라 할 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: People & Promise -->
+        <section class="reveal pb-20">
+            <div class="bg-gray-900 text-white rounded-3xl overflow-hidden shadow-2xl relative">
+                <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDEwaDQwdjJIMHptMCAyMGg0MHYySDB6IiBmaWxsPSIjZmZmIi8+PC9zdmc+')]"></div>
+                <div class="p-10 md:p-16 relative z-10">
+                    <div class="text-center mb-10">
+                        <span class="text-dokdo-light font-bold tracking-wider">07. 사람들과 우리의 약속</span>
+                        <h2 class="text-3xl md:text-5xl font-bold mt-2">독도를 지켜온 사람들</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-dokdo-accent"><i class="fas fa-user-check mr-2"></i>독도를 유인도로 만든 최초의 주민</h3>
+                            <p class="text-gray-300 leading-relaxed mb-6">
+                                최종덕 님은 1960년대부터 독도에 거주하며 직접 주민등록을 이전하는 등 독도가 사람이 사는 소중한 우리 땅임을 온몸으로 증명했습니다.
+                            </p>
+                            <h3 class="text-xl font-bold mb-3 text-dokdo-accent"><i class="fas fa-hands-helping mr-2"></i>함께하는 노력</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                동북아역사재단, 독도수호대 등 국가와 민간이 함께 독도의 가치를 연구하고 알리고 있습니다.
+                            </p>
+                        </div>
+                        <div class="flex flex-col items-center justify-center bg-white/10 p-8 rounded-2xl border border-white/20 text-center">
+                            <i class="far fa-calendar-alt text-5xl text-dokdo-light mb-4"></i>
+                            <div class="text-sm text-gray-300 mb-1">국민의 관심을 높이기 위한 소중한 기념일</div>
+                            <div class="text-4xl font-black text-white mb-2">10월 25일</div>
+                            <div class="text-2xl font-bold text-dokdo-accent">독도의 날</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-white/20 text-center">
+                        <p class="text-lg md:text-xl font-light italic">
+                            "영토는 단순히 주어지는 것이 아니라, 우리의 지속적인 관심과<br class="hidden md:block"> 실천적인 노력이 있을 때 비로소 굳건히 지켜질 수 있습니다."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-8 text-center text-sm">
+        <p>© 독도 입문자 가이드. 우리 땅 독도에 대한 사랑을 꾸준히 실천해 나갑시다.</p>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Scroll Reveal Animation using Intersection Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    
+                    entry.target.classList.add('active');
+                    
+                    // Specific logic for distance bars to animate width when in view
+                    if (entry.target.id === 'location') {
+                        const bars = document.querySelectorAll('.distance-bar');
+                        bars.forEach(bar => {
+                            setTimeout(() => {
+                                bar.style.width = bar.getAttribute('data-width');
+                            }, 300);
+                        });
+                    }
+                    
+                    observer.unobserve(entry.target);
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+
+        // Tab functionality for Boundaries Section
+        function openTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active class from buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected content
+            document.getElementById(tabId).classList.add('active');
+            // Add active class to clicked button
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
