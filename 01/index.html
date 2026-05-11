@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>독도 연대기</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* 스크롤바 숨기기 유틸리티 */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-blue-50 to-white text-gray-800 font-sans">
+  
+  <!-- 헤더 섹션 -->
+  <header class="py-16 px-6 text-center bg-blue-900 text-white shadow-md relative overflow-hidden">
+    
+    <!-- 홈 버튼 추가 -->
+    <a href="../index.html" class="absolute top-4 left-4 md:top-6 md:left-6 z-20 flex items-center gap-2 text-blue-200 hover:text-white transition-all duration-300 bg-blue-800/50 hover:bg-blue-700 px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm shadow-sm hover:shadow">
+      <i data-lucide="home" class="w-4 h-4"></i>
+      홈
+    </a>
+
+    <div class="absolute opacity-10 top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center">
+      <i data-lucide="ship" style="width: 400px; height: 400px;"></i>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">독도 주요 연대기</h1>
+      <p class="text-blue-200 text-lg md:text-xl font-light">
+        역사적 문헌과 사건으로 알아보는 자랑스러운 우리 영토, 독도의 발자취
+      </p>
+    </div>
+  </header>
+
+  <!-- 컨트롤 패널 (검색 및 필터) -->
+  <div class="max-w-4xl mx-auto px-6 py-8">
+    <div class="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-blue-100">
+      
+      <!-- 검색바 -->
+      <div class="relative w-full md:w-1/2">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <i data-lucide="search" class="h-5 w-5 text-gray-400"></i>
+        </div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="연도, 사건명 또는 내용을 검색하세요..."
+          class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+        />
+      </div>
+
+      <!-- 시대 필터 -->
+      <div id="era-buttons" class="flex space-x-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+        <!-- 버튼들이 JS에 의해 렌더링됩니다 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 연대기 메인 섹션 -->
+  <div class="max-w-4xl mx-auto px-6 pb-20" id="timeline-container">
+    <!-- 타임라인 아이템들이 JS에 의해 렌더링됩니다 -->
+  </div>
+
+  <script>
+    // 독도 연대기 데이터
+    const timelineData = [
+      { year: 1454, title: '세종실록지리지', content: '우산(독도)과 무릉(울릉도)이 강원도 울진현에 속한다고 기록', type: 'doc', era: '조선' },
+      { year: 1531, title: '신증동국여지승람', content: '독도가 우리 영토임을 밝히는 관찬 지리지 편찬', type: 'doc', era: '조선' },
+      { year: 1667, title: '은주시청합기', content: '일본의 문헌. 울릉도와 독도가 일본 영토 밖(조선 땅)임을 기록', type: 'doc', era: '조선' },
+      { year: 1693, title: '1차 안용복 사건', content: '안용복이 일본으로 끌려가 독도가 조선 땅임을 주장', type: 'conflict', era: '조선' },
+      { year: 1696, title: '2차 안용복 사건', content: '안용복이 일본에 건어가 불법 침범에 항의. 일본 막부가 \'울릉도 도해 금지령\' 내림', type: 'conflict', era: '조선' },
+      { year: 1785, title: '삼국접양지도', content: '일본 하야시 시헤이가 제작. 독도를 조선색(황색)으로 칠하고 \'조선의 것\'이라 표기', type: 'map', era: '조선' },
+      { year: 1877, title: '태정관 지령', content: '일본 최고 행정기관이 "독도와 울릉도는 일본과 관계없다"고 공식 인정', type: 'shield', era: '근대' },
+      { year: 1900, title: '대한제국 칙령 41호', content: '고종 황제가 독도를 울릉군의 관할 구역으로 공식 반포', type: 'doc', era: '근대' },
+      { year: 1905, title: '시마네현 고시 40호', content: '일본이 러일전쟁 중 독도를 불법적으로 \'다케시마\'로 편입', type: 'conflict', era: '근대' },
+      { year: 1906, title: '심흥택 보고서', content: '울릉군수 심흥택이 독도가 일본에 편입되었다는 소식을 듣고 중앙 정부에 보고', type: 'map', era: '근대' },
+      { year: 1946, title: 'SCAPIN 제677호', content: '연합군최고사령관 지령. 독도를 일본의 통치권에서 제외함', type: 'shield', era: '현대' },
+      { year: 1951, title: '샌프란시스코 강화조약', content: '일본이 한국의 독립을 인정 (독도 명시 누락으로 분쟁의 씨앗이 됨)', type: 'doc', era: '현대' },
+      { year: 1952, title: '평화선 선포', content: '이승만 대통령이 독도를 포함한 인접 해양 주권 선언', type: 'shield', era: '현대' },
+      { year: 1953, title: '독도의용수비대 활동', content: '홍순칠 등 민간인들이 독도에 상주하며 일본의 침범을 막음', type: 'shield', era: '현대' },
+      { year: 1965, title: '한일기본조약', content: '독도 문제를 언급하지 않고 봉합 (이후 갈등 잠복)', type: 'doc', era: '현대' },
+      { year: 1998, title: '신한일어업협정', content: '독도가 한일 중간수역에 포함되며 논란 발생', type: 'doc', era: '현대' },
+      { year: 2005, title: '다케시마의 날 제정', content: '일본 시마네현이 2월 22일을 \'다케시마의 날\'로 제정', type: 'conflict', era: '현대' },
+      { year: 2011, title: '일본 교과서 왜곡', content: '일본 중학교 교과서 14종에 독도 영유권 주장 기술', type: 'conflict', era: '현대' }
+    ];
+
+    // 상태 관리
+    let searchTerm = '';
+    let selectedEra = '전체';
+
+    // DOM 요소
+    const searchInput = document.getElementById('search-input');
+    const eraButtonsContainer = document.getElementById('era-buttons');
+    const timelineContainer = document.getElementById('timeline-container');
+
+    // 성격에 따른 아이콘 및 색상 맵핑
+    const getTypeConfig = (type) => {
+      switch(type) {
+        case 'doc': return { icon: 'book-open', color: 'bg-blue-100 text-blue-700 border-blue-500' };
+        case 'conflict': return { icon: 'alert-circle', color: 'bg-red-100 text-red-700 border-red-500' };
+        case 'shield': return { icon: 'shield', color: 'bg-green-100 text-green-700 border-green-500' };
+        case 'map': return { icon: 'map-pin', color: 'bg-yellow-100 text-yellow-700 border-yellow-500' };
+        default: return { icon: 'ship', color: 'bg-gray-100 text-gray-700 border-gray-500' };
+      }
+    };
+
+    // 시대 필터 버튼 렌더링 함수
+    const renderEraButtons = () => {
+      const eras = ['전체', '조선', '근대', '현대'];
+      
+      eraButtonsContainer.innerHTML = eras.map(era => {
+        const isActive = selectedEra === era;
+        const activeClass = isActive ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200';
+        
+        return `
+          <button
+            onclick="handleEraClick('${era}')"
+            class="px-5 py-2 rounded-xl whitespace-nowrap text-sm font-semibold transition-all ${activeClass}"
+          >
+            ${era}
+          </button>
+        `;
+      }).join('');
+    };
+
+    // 타임라인 렌더링 함수
+    const renderTimeline = () => {
+      // 필터링 로직
+      const filteredData = timelineData.filter((item) => {
+        const matchesSearch = item.title.includes(searchTerm) || 
+                              item.content.includes(searchTerm) || 
+                              item.year.toString().includes(searchTerm);
+        const matchesEra = selectedEra === '전체' || item.era === selectedEra;
+        
+        return matchesSearch && matchesEra;
+      });
+
+      if (filteredData.length === 0) {
+        timelineContainer.innerHTML = `
+          <div class="text-center py-20 text-gray-500">
+            <i data-lucide="alert-circle" class="mx-auto h-12 w-12 text-gray-300 mb-4"></i>
+            <p class="text-lg">검색 결과가 없습니다.</p>
+          </div>
+        `;
+      } else {
+        let itemsHtml = filteredData.map((item, index) => {
+          const config = getTypeConfig(item.type);
+          const isEven = index % 2 === 0;
+          const flexDirectionClass = isEven ? 'md:flex-row-reverse' : '';
+          
+          // 색상 클래스를 배열로 분리
+          const colorClasses = config.color.split(' ');
+          const bgColor = colorClasses[0];
+          const textColor = colorClasses[1];
+          const borderColor = colorClasses[2];
+
+          return `
+            <div class="relative flex items-center md:justify-between flex-col md:flex-row w-full ${flexDirectionClass}">
+              
+              <!-- 데스크탑용 빈 공간 (레이아웃 균형용) -->
+              <div class="hidden md:block w-5/12"></div>
+
+              <!-- 중앙 아이콘 (타임라인 노드) -->
+              <div class="absolute left-[-2rem] md:left-1/2 md:transform md:-translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full border-4 border-white shadow-lg z-10 ${bgColor} ${textColor}">
+                <i data-lucide="${config.icon}" class="w-5 h-5"></i>
+              </div>
+
+              <!-- 카드 콘텐츠 -->
+              <div class="w-full md:w-5/12 pl-8 md:pl-0 mt-4 md:mt-0 group">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 ${borderColor} hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-3xl font-black text-blue-900 tracking-tighter">
+                      ${item.year}
+                    </span>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-500">
+                      ${item.era}
+                    </span>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors">
+                    ${item.title}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed text-sm md:text-base break-keep">
+                    ${item.content}
+                  </p>
+                </div>
+              </div>
+              
+            </div>
+          `;
+        }).join('');
+
+        timelineContainer.innerHTML = `
+          <div class="relative border-l-4 border-blue-200 ml-4 md:ml-0 md:border-none">
+            <!-- 데스크탑 중앙선 -->
+            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full border-l-4 border-blue-200"></div>
+            <div class="space-y-12">
+              ${itemsHtml}
+            </div>
+          </div>
+        `;
+      }
+
+      // 동적으로 추가된 DOM 요소에 대해 Lucide 아이콘 다시 그리기
+      lucide.createIcons();
+    };
+
+    // 이벤트 핸들러
+    const handleEraClick = (era) => {
+      selectedEra = era;
+      renderEraButtons();
+      renderTimeline();
+    };
+
+    searchInput.addEventListener('input', (e) => {
+      searchTerm = e.target.value;
+      renderTimeline();
+    });
+
+    // 초기화
+    document.addEventListener('DOMContentLoaded', () => {
+      renderEraButtons();
+      renderTimeline();
+      // 정적 요소(검색 돋보기, 배경 배 모양 등) 아이콘 초기화
+      lucide.createIcons();
+    });
+
+  </script>
+</body>
+</html>
