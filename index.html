@@ -120,6 +120,14 @@
                     독도용어 <i class="fas fa-book ml-2"></i>
                 </a>
             </div>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4">
+                <button onclick="openModal('image')" class="inline-block bg-dokdo-accent/90 backdrop-blur-sm text-white font-bold py-2 px-6 rounded-full shadow-lg border border-white/30 hover:bg-dokdo-accent transition duration-300 cursor-pointer">
+                    인포그래픽보기 <i class="fas fa-image ml-2"></i>
+                </button>
+                <button onclick="openModal('video')" class="inline-block bg-dokdo-accent/90 backdrop-blur-sm text-white font-bold py-2 px-6 rounded-full shadow-lg border border-white/30 hover:bg-dokdo-accent transition duration-300 cursor-pointer">
+                    동영상보기 <i class="fas fa-play-circle ml-2"></i>
+                </button>
+            </div>
         </div>
         <div class="wave"></div>
     </header>
@@ -382,6 +390,23 @@
 
     </main>
 
+    <!-- Media Modal Popup -->
+    <div id="mediaModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity opacity-0 duration-300">
+        <div class="relative w-full max-w-4xl mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="modalContentBox">
+            <!-- Header -->
+            <div class="flex justify-between items-center p-4 border-b bg-gray-50">
+                <h3 id="modalTitle" class="text-xl font-bold text-gray-800">미디어 보기</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-red-500 text-2xl transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <!-- Content Area -->
+            <div id="modalBody" class="p-6 flex justify-center items-center max-h-[80vh] overflow-y-auto bg-gray-100">
+                <!-- Dynamic content inserted here -->
+            </div>
+        </div>
+    </div>
+
     <footer class="bg-gray-800 text-gray-400 py-8 text-center text-sm">
         <p>© 독도 입문자 가이드. 우리 땅 독도에 대한 사랑을 꾸준히 실천해 나갑시다.</p>
     </footer>
@@ -438,6 +463,56 @@
             // Add active class to clicked button
             event.currentTarget.classList.add('active');
         }
+
+        // Modal functionality
+        function openModal(type) {
+            const modal = document.getElementById('mediaModal');
+            const modalBody = document.getElementById('modalBody');
+            const modalTitle = document.getElementById('modalTitle');
+            const contentBox = document.getElementById('modalContentBox');
+            
+            modalBody.innerHTML = ''; // Clear previous content
+
+            if (type === 'image') {
+                modalTitle.innerText = '독도 인포그래픽';
+                // 실제 이미지가 없을 경우를 대비해 onerror 속성에 placeholder 추가
+                modalBody.innerHTML = '<img src="dokdo_info.png" alt="독도 인포그래픽" class="max-w-full h-auto rounded-lg shadow-md" onerror="this.src=\'https://via.placeholder.com/800x1200?text=dokdo_info.png\'">';
+            } else if (type === 'video') {
+                modalTitle.innerText = '독도 동영상';
+                modalBody.innerHTML = '<video controls autoplay class="w-full h-auto rounded-lg shadow-md max-h-[70vh]"><source src="dokdo_mp4_1.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video>';
+            }
+
+            modal.classList.remove('hidden');
+            // Trigger reflow for smooth transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                contentBox.classList.remove('scale-95');
+                contentBox.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('mediaModal');
+            const contentBox = document.getElementById('modalContentBox');
+            const modalBody = document.getElementById('modalBody');
+
+            modal.classList.add('opacity-0');
+            contentBox.classList.remove('scale-100');
+            contentBox.classList.add('scale-95');
+
+            // Wait for transition to finish before hiding and stopping media
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalBody.innerHTML = ''; // 동영상 재생 중지 및 메모리 확보
+            }, 300);
+        }
+
+        // 모달창 외부 영역(검은 배경) 클릭 시 닫기
+        document.getElementById('mediaModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
